@@ -10,6 +10,7 @@ import java.util.Date;
 public class UserDTO {
     private String username;
     private String password;
+    private String name;
     private String email;
     private String birth;
     private String phone;
@@ -17,6 +18,7 @@ public class UserDTO {
         return User.builder()
                 .username(username)
                 .password(password)
+                .name(name)
                 .email(email)
                 .birth(birth)
                 .phone(phone)
