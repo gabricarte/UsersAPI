@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import personal.project.users.domain.dto.UserDTO;
 import personal.project.users.domain.entity.User;
+import personal.project.users.exception.UserNotFoundException;
 import personal.project.users.repository.UserRepository;
 import personal.project.users.utils.Utils;
 
@@ -19,7 +20,11 @@ public class UserService {
     }
 
     public User getUser(String username){
-        return userRepository.findUserByUsername(username);
+        User user = userRepository.findUserByUsername(username);
+        if (user == null){
+            throw new UserNotFoundException(username);
+        }
+        return user;
     }
 
     public User registerUser(UserDTO user){
