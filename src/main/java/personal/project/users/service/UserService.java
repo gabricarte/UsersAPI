@@ -9,6 +9,7 @@ import personal.project.users.repository.UserRepository;
 import personal.project.users.utils.Utils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,15 +21,18 @@ public class UserService {
     }
 
     public User getUser(String username){
-        User user = userRepository.findUserByUsername(username);
-        if (user == null){
-            throw new UserNotFoundException(username);
-        }
-        return user;
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(username));
     }
 
     public User registerUser(UserDTO user){
         Utils.validateUser(user);
         return userRepository.save(user.toEntity());
+    }
+
+    public String deleteUser(String username){
+        User user  = getUser(username);
+        userRepository.delete(user);
+        return "Usuário " + username +" deletado com sucesso!";
     }
 }

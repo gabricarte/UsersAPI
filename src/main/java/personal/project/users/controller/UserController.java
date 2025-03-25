@@ -25,10 +25,14 @@ public class UserController {
     public ResponseEntity<User> getUser(@PathVariable String username){
         return ResponseEntity.ok(userService.getUser(username));
     }
-
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody UserDTO userDTO){
         User newUser = userService.registerUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+    }
+
+    @DeleteMapping("/{username}/delete")
+    public ResponseEntity<String> deleteUser(@PathVariable String username){
+        return ResponseEntity.ok(userService.deleteUser(username));
     }
 }
