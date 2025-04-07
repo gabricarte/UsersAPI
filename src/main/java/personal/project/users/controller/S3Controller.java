@@ -26,13 +26,13 @@ public class S3Controller {
     }
 
     @GetMapping("/object")
-    public ResponseEntity<String> getLastLoadProcess(@RequestBody String objectKey) {
+    public ResponseEntity<String> getObject(@RequestBody String objectKey) {
         String data = service.getObject(objectKey);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(data);
     }
 
     @GetMapping("/download")
-    public ResponseEntity<byte[]> getObject(@RequestBody String objectKey) {
+    public ResponseEntity<byte[]> downloadObject(@RequestBody String objectKey) {
         byte[] data = service.getObjectBytes(objectKey);
 
         HttpHeaders headers = new HttpHeaders();
