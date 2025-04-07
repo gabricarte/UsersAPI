@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.core.exception.SdkException;
+import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
 
@@ -54,6 +56,35 @@ public class S3Service {
             return objectStream.readAllBytes();
         } catch (IOException e) {
             throw new RuntimeException("Erro ao baixar o objeto do S3: " + objectKey, e);
+        }
+    }
+
+    public String putObject(String objectKey, byte[] content) {
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(objectKey)
+                .build();
+
+        try {
+            s3Client.putObject(putObjectRequest, RequestBody.fromBytes(content));
+            return "Objeto enviado com sucesso: " + objectKey;
+        } catch (SdkException e) {
+            throw new RuntimeException("Erro ao enviar objeto para o S3: " + objectKey, e);
+        }
+    }
+
+
+    public String deleteObject(String objectKey) {
+        DeleteObjectRequest deleteRequest = DeleteObjectRequest.builder()
+                .bucket(bucketName)
+                .key(objectKey)
+                .build();
+
+        try {
+            s3Client.deleteObject(deleteRequest);
+            return "Objeto excluído com sucesso: " + objectKey;
+        } catch (SdkException e) {
+            throw new RuntimeException("Erro ao excluir objeto do S3: " + objectKey, e);
         }
     }
 }
