@@ -33,6 +33,6 @@ public class UserService {
     public String deleteUser(String username){
         User user  = getUser(username);
         userRepository.delete(user);
-        return "Usu·rio " + username +" deletado com sucesso!";
+        return "Usu√°rio " + username +" deletado com sucesso!";
     }
 }

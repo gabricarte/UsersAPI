@@ -25,18 +25,14 @@ public class ReportController {
 
     @GetMapping("/{type}")
     public ResponseEntity<byte[]> generateUserReport(@PathVariable String type) throws IOException, ReportProviderNotFoundException {
-        // Cria o DTO
         ReportDTO reportDTO = ReportDTO.builder()
                 .type(type)
                 .build();
 
-        // Gera o relatório
         InputStream reportStream = reportManager.createReport(reportDTO);
 
-        // Lê os bytes do relatório
         byte[] reportBytes = reportStream.readAllBytes();
 
-        // Define o tipo de conteúdo e headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(type.equals("xls")
                 ? MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

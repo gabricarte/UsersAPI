@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-// Essa é a classe que servirá como modelo para os provedores de relatório
 public abstract class ReportProvider {
 
     public abstract String reportType();

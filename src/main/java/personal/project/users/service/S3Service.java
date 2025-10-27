@@ -37,7 +37,7 @@ public class S3Service {
     public String getObject(String objectKey) {
         GetObjectRequest getObjectRequest = GetObjectRequest.builder()
                 .bucket(bucketName)
-                .key(objectKey) // a key é o que torna o objeto único
+                .key(objectKey)
                 .build();
         try (ResponseInputStream<GetObjectResponse> objectStream = s3Client.getObject(getObjectRequest)) {
             return IOUtils.toString(objectStream, StandardCharsets.UTF_8);
@@ -82,7 +82,7 @@ public class S3Service {
 
         try {
             s3Client.deleteObject(deleteRequest);
-            return "Objeto excluído com sucesso: " + objectKey;
+            return "Objeto excluÃ­do com sucesso: " + objectKey;
         } catch (SdkException e) {
             throw new RuntimeException("Erro ao excluir objeto do S3: " + objectKey, e);
         }

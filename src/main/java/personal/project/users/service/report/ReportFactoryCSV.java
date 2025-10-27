@@ -53,7 +53,7 @@ public class ReportFactoryCSV {
 
         byte[] file = Files.readAllBytes(fileTemp.toPath());
         if(!fileTemp.delete()) {
-            log.error("class=ReportFactoryCSV method=generate Error=Arquivo tempor·rio n„o excluÌdo.");
+            log.error("class=ReportFactoryCSV method=generate Error=Arquivo tempor√°rio n√£o exclu√≠do.");
         }
 
         return new ByteArrayInputStream(file);

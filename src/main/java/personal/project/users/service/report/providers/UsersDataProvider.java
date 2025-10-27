@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
-@Component // component é necessário pq?
+@Component
 public class UsersDataProvider extends ReportProvider {
 
     private final UserService userService;
@@ -26,7 +26,6 @@ public class UsersDataProvider extends ReportProvider {
                 "Birth", "Phone");
     }
 
-    // Vai no banco para buscar os usuários
     @Override
     protected List<List<String>> getEntryReportData(ReportDTO reportDTO) {
         List<User> users = userService.getUsers();

@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
-// Responsável por gerar um relatório em Excel (.xls) usando Apache POI.
 
 @Builder
 public class ReportFactory {
@@ -23,8 +22,6 @@ public class ReportFactory {
     private List<String> headers;
     private List<List<String>> records;
 
-    // é uma classe abstrata que permite ler dados em bytes a partir de uma fonte,
-    // como um arquivo, uma conexão de rede ou uma matriz de bytes
     public InputStream generate() throws IOException {
         try (XSSFWorkbook workbook = new XSSFWorkbook()) {
             XSSFSheet sheet = workbook.createSheet(name);
